@@ -66,7 +66,7 @@ Transaction Management: Critical operations are wrapped in explicit transactions
 
 For a complete view of the database structure, see the ERD below or click to view full size.
 
-[![ERD](bankin_db_project/documentation/ERD.png)](documentation/ERD.png)
+[![ERD](banking_db_project/documentation/ERD.png)](documentation/ERD.png)
 
 
 Principle of Least Privilege: The RBAC model ensures employees can only access the data and execute the procedures necessary for their specific role.
