@@ -7,6 +7,8 @@ A comprehensive and professional database project for a **Banking Management Sys
 * [Key Features](#key-features)
 * [Setup and Execution](#setup-and-execution)
 * [Security Measures](#security-measures)
+* [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
+
 
 ---
 
@@ -58,6 +60,14 @@ Security is paramount in banking systems. This database implements the following
 Password Hashing: Passwords and sensitive PII are not stored in plain text. (The scripts use a placeholder function for demonstration).
 
 Transaction Management: Critical operations are wrapped in explicit transactions to prevent partial updates and data corruption.
+
+
+## Entity Relationship Diagram (ERD)
+
+For a complete view of the database structure, see the ERD below or click to view full size.
+
+[![ERD](bankin_db_project/documentation/ERD.png)](documentation/ERD.png)
+
 
 Principle of Least Privilege: The RBAC model ensures employees can only access the data and execute the procedures necessary for their specific role.
 
