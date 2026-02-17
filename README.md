@@ -1,6 +1,6 @@
 #  Core Banking Database Infrastructure
 
-!(https://img.shields.io/badge/Database-MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![MySQL](https://img.shields.io/badge/Database-MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 
 ##  Project Overview
 
