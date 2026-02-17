@@ -1,71 +1,78 @@
-# Banking Management System Database
+# Enterprise-Grade Core Banking Database Infrastructure
 
-A comprehensive and professional database project for a **Banking Management System (BMS)**, designed and implemented using **MySQL**. This project emphasizes a scalable data structure, complex transactional business logic directly within the database, and strong security practices.
+![MySQL](https://img.shields.io/badge/Database-MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## Table of Contents
+##  Project Overview
 
-* [Key Features](#key-features)
-* [Setup and Execution](#setup-and-execution)
-* [Security Measures](#security-measures)
-* [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
+This repository hosts a comprehensive SQL-based infrastructure designed to simulate a Core Banking System. Unlike simple CRUD applications, this project focuses on the complex backend challenges of the financial sector: Data Integrity, Concurrency Control, Security, and Scalability.
 
+I designed this system to demonstrate advanced RDBMS concepts, proving that critical business logic—such as money transfers, loan amortization, and fraud detection—can be safely encapsulated within the database layer to ensure strict ACID compliance and high performance.
 
 ---
 
-## Key Features
+##  Engineering & Technical Highlights
 
-This database is built to handle the core operations of a modern bank, featuring:
+I engineered this system with a focus on real-world constraints. Key technical features include:
 
-| Feature | Description |
+### 1. ACID Compliance & Transaction Management
+* Problem: In banking, partial updates (e.g., money deducted but not credited) are unacceptable.
+* My Solution: Implemented robust Stored Procedures (e.g., sp_transfer_money) utilizing Transaction Control Language (TCL).
+* Mechanism: Uses START TRANSACTION, COMMIT, and ROLLBACK to ensure Atomicity. If any step fails, the entire operation is reverted to prevent data inconsistency.
+
+### 2. Security-First Architecture (Defense in Depth)
+* Cryptography: Implemented SHA-256 Hashing logic within the database to store credit card details (PAN, CVV), adhering to PCI-DSS principles (no plain-text storage of sensitive data).
+* RBAC (Role-Based Access Control): Designed a granular permission system. Database users are restricted via Views and Stored Procedures, preventing direct table access based on their role (e.g., Tellers vs. Managers).
+
+### 3. Advanced Business Logic Encapsulation
+* Loan Engine: Instead of relying on application-level math, I implemented User-Defined Functions (UDFs) to calculate monthly installments using the Amortization Formula:
+
+  $$M = P \frac{r(1+r)^n}{(1+r)^n - 1}$$
+
+* Automation: Utilized Triggers to automatically update account balances after transactions and log audit trails, ensuring the derived data is always consistent with the raw transaction history.
+
+### 4. Real-Time Fraud Detection (Event-Driven)
+* Implemented an intelligent monitoring system using Triggers.
+* The system analyzes transaction velocity and amounts in real-time. If an anomaly is detected (e.g., exceeding thresholds), the account is effectively blocked instantly before the transaction commits.
+
+### 5. Performance Optimization (OLTP vs. OLAP)
+* OLTP (Online Transaction Processing): The core schema is normalized to 3NF to optimize write speeds for daily operations.
+* OLAP (Online Analytical Processing): To prevent reporting queries from locking active tables, I implemented a Data Warehousing strategy using scheduled Events to populate denormalized Summary Tables for fast analytics.
+
+### 6. Data Lifecycle Management
+* Archiving Strategy: Designed automated procedures to migrate "Cold Data" (historical transactions) to archive tables, keeping the active indices small and maintaining high insertion throughput.
+
+---
+
+##  Database Schema & Architecture
+
+The database is designed with strict Referential Integrity.
+* Foreign Keys: Configured with ON DELETE RESTRICT to prevent orphan records.
+* Constraints: Extensive use of UNIQUE and CHECK constraints to validate data at the lowest level (e.g., non-negative balances).
+
+---
+
+##  Repository Structure
+
+The SQL scripts are numbered to represent the logical order of execution for setting up the environment:
+| File Name | Description |
 | :--- | :--- |
-| **Modular Design** | Separation into core banking, **Loan Management**, and **Credit Card Management** modules. |
-| **Transactional Logic** | Sensitive operations (e.g., **fund transfers**, loan disbursements) are handled via **Stored Procedures** to ensure Atomicity (ACID). |
-| **Business Rule Automation** | **Triggers** automatically enforce business rules, such as checking for minimum balance before a withdrawal. |
-| **Data Security** | Implementation of **hashing** (simulated) for sensitive customer data like passwords and credit card numbers. |
-| **Access Control (RBAC)** | A **Role-Based Access Control** model defines permissions for bank employees and managers. |
-| **Performance Optimization** | Effective use of **Indexing** to optimize query performance on frequently accessed columns (e.g., account numbers, customer IDs). |
+| 01_schema.sql | Core table definitions (Branches, Customers, Accounts, Transactions). |
+| 02_views.sql | Reporting views for quick data access (e.g., CustomerTotalBalance). |
+| 03_stored_procedures.sql | Main transaction logic enforcing ACID properties (Transfer Money). |
+| 04_triggers.sql | Automated balance updates and audit logging mechanism. |
+| 05_core_enhancements.sql | Employees table and International Banking updates (IBAN/SWIFT). |
+| 06_loan_module_schema.sql | Schema definitions for Loans and Payments. |
+| 07_loan_module_logic.sql | Loan application logic and mathematical amortization functions. |
+| 08_credit_card_schema.sql | Schema definitions for Credit Cards. |
+| 09_credit_card_logic.sql | Credit card issuance and management with SHA-256 hashing. |
+| 10_internal_security_rbac.sql | Internal security roles and permission mapping (RBAC). |
+| 11_sample_data.sql | Comprehensive mock data for testing all modules. |
+| 12_batch_jobs_module.sql | Scheduled events for monthly interest calculations. |
+| 13_fraud_detection_module.sql | Real-time anomaly detection triggers. |
+| 14_analytics_module.sql | Summary tables for OLAP reporting. |
+| 15_archiving_module.sql | Automated data migration for performance optimization. |
+| 16_backup_logs.sql | Backup strategy logging and monitoring tables. |
 
 ---
-
-
-
-
-## Setup and Execution
-
-To deploy the complete database structure, logic, and sample data on your local MySQL server, execute the scripts in the **`sql_scripts`** directory in the **exact order** listed below.
-
-### Execution Order
-
-Run these files sequentially using your MySQL client (e.g., MySQL Workbench, `mysql` CLI):
-
-```bash
-# Order of execution:
-
-1. 01_schema.sql
-2. 02_views.sql
-3. 03_stored_procedures.sql
-4. 04_triggers.sql
-5. 05_loan_module_schema.sql
-6. 06_loan_module_logic.sql
-7. 07_credit_card_module_schema.sql
-8. 08_credit_card_module_logic.sql
-9. 09_internal_security_schema.sql
-10. 10_sample_data.sql
-```
-After execution, the database named banking_system will be fully operational, ready for testing and integration.
-
-## Security Measures
-Security is paramount in banking systems. This database implements the following security features:
-
-Password Hashing: Passwords and sensitive PII are not stored in plain text. (The scripts use a placeholder function for demonstration).
-
-Transaction Management: Critical operations are wrapped in explicit transactions to prevent partial updates and data corruption.
-
-
-## Entity Relationship Diagram (ERD)
-
-
-[![ERD](banking_db_project/documentation/ERD.png)](documentation/ERD.png)
-
-
-
