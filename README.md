@@ -60,17 +60,16 @@ The SQL scripts are numbered to represent the logical order of execution for set
 | 02_views.sql | Reporting views for quick data access (e.g., CustomerTotalBalance). |
 | 03_stored_procedures.sql | Main transaction logic enforcing ACID properties (Transfer Money). |
 | 04_triggers.sql | Automated balance updates and audit logging mechanism. |
-| 05_core_enhancements.sql | Employees table and International Banking updates (IBAN/SWIFT). |
-| 06_loan_module_schema.sql | Schema definitions for Loans and Payments. |
-| 07_loan_module_logic.sql | Loan application logic and mathematical amortization functions. |
-| 08_credit_card_schema.sql | Schema definitions for Credit Cards. |
-| 09_credit_card_logic.sql | Credit card issuance and management with SHA-256 hashing. |
-| 10_internal_security_rbac.sql | Internal security roles and permission mapping (RBAC). |
-| 11_sample_data.sql | Comprehensive mock data for testing all modules. |
-| 12_batch_jobs_module.sql | Scheduled events for monthly interest calculations. |
-| 13_fraud_detection_module.sql | Real-time anomaly detection triggers. |
-| 14_analytics_module.sql | Summary tables for OLAP reporting. |
-| 15_archiving_module.sql | Automated data migration for performance optimization. |
-| 16_backup_logs.sql | Backup strategy logging and monitoring tables. |
+| 05_loan_module_schema.sql | Schema definitions for Loans and Payments. |
+| 06_loan_module_logic.sql | Loan application logic and mathematical amortization functions. |
+| 07_credit_card_schema.sql | Schema definitions for Credit Cards. |
+| 08_credit_card_logic.sql | Credit card issuance and management with SHA-256 hashing. |
+| 09_internal_security_rbac.sql | Internal security roles and permission mapping (RBAC). |
+| 10_sample_data.sql | Comprehensive mock data for testing all modules. |
+| 11_batch_jobs_module.sql | Scheduled events for monthly interest calculations. |
+| 12_fraud_detection_module.sql | Real-time anomaly detection triggers. |
+| 13_analytics_module.sql | Summary tables for OLAP reporting. |
+| 14_archiving_module.sql | Automated data migration for performance optimization. |
+| 15_backup_logs.sql | Backup strategy logging and monitoring tables. |
 
 ---
