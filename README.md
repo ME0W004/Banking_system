@@ -1,8 +1,6 @@
-# Enterprise-Grade Core Banking Database Infrastructure
+#  Core Banking Database Infrastructure
 
-![MySQL](https://img.shields.io/badge/Database-MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+!(https://img.shields.io/badge/Database-MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 
 ##  Project Overview
 
